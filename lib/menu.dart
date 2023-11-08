@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
-  final List<ShopItem> items = [
-    ShopItem("Lihat Item", Icons.checklist, Colors.red),
-    ShopItem("Tambah Item", Icons.add_shopping_cart, Colors.amber),
-    ShopItem("Logout", Icons.logout, Colors.lightBlue),
+  final List<InventoryItem> items = [
+    InventoryItem("Lihat Item", Icons.checklist, Colors.red),
+    InventoryItem("Tambah Item", Icons.add_shopping_cart, Colors.amber),
+    InventoryItem("Logout", Icons.logout, Colors.lightBlue),
   ];
 
   @override
@@ -48,9 +48,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
+                children: items.map((InventoryItem item) {
                   // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return InventoryCard(item);
                 }).toList(),
               ),
             ],
@@ -61,18 +61,18 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ShopItem {
+class InventoryItem {
   final String name;
   final IconData icon;
   final MaterialColor color;
 
-  ShopItem(this.name, this.icon, this.color);
+  InventoryItem(this.name, this.icon, this.color);
 }
 
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
+class InventoryCard extends StatelessWidget {
+  final InventoryItem item;
 
-  const ShopCard(this.item, {super.key}); // Constructor
+  const InventoryCard(this.item, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
