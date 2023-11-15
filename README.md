@@ -1,5 +1,5 @@
 <details>
-    <summary>Tugas 6</summary>
+  <summary>Tugas 7</summary>
 1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?
 
 Stateless Widget:
@@ -151,5 +151,70 @@ Stateful widget memiliki dua kelas terpisah: kelas widget itu sendiri (yang bers
     );
   }
     </pre>
+
+</details>
+<details>
+  <summary>Tugas 8</summary>
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+
+Navigator.push():
+
+Digunakan untuk menambahkan route baru ke dalam tumpukan (stack) route navigator.
+Memberikan kemampuan pengguna untuk kembali ke halaman sebelumnya dengan tombol "Back".
+Tetap menyimpan halaman sebelumnya di dalam tumpukan route.
+Contoh:
+
+<pre>
+// Navigasi ke halaman baru
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => SecondScreen()),
+);
+</pre>
+Navigator.pushReplacement():
+
+Menggantikan halaman saat ini dengan halaman baru.
+Tidak menyimpan halaman sebelumnya di dalam tumpukan route.
+Berguna ketika Anda ingin menggantikan halaman login dengan halaman beranda setelah login berhasil.
+Contoh:
+
+<pre>
+// Navigasi dan menggantikan halaman saat ini
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => HomeScreen()),
+);
+</pre>
+2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+
+Beberapa layout widgets pada Flutter dan konteks penggunaannya:
+
+Container: Widget yang digunakan untuk mengelompokkan dan mendekorasi widget lainnya. Digunakan untuk mengatur tata letak dan styling.
+
+Row dan Column: Merepresentasikan baris dan kolom, secara berturut-turut, yang memungkinkan pengaturan widget secara horizontal (Row) atau vertikal (Column).
+
+ListView dan GridView: Membungkus kumpulan widget secara berurutan (ListView) atau dalam bentuk grid (GridView).
+
+Stack dan Positioned: Membantu menempatkan widget di atas atau di bawah widget lain, sering digunakan untuk mendekorasi atau menumpuk widget.
+
+Scaffold: Merupakan kerangka utama untuk aplikasi Flutter, menyediakan struktur dasar seperti AppBar, Drawer, dan BottomNavigationBar.
+
+3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+
+TextFormField, karena TextFormField adalah widget praktis yang nge-wrap sebuah widget TextField di dalam sebuah FormField.
+
+4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Penerapan Clean Architecture pada Aplikasi Flutter
+Clean Architecture pada aplikasi Flutter melibatkan pembagian kode menjadi beberapa lapisan:
+
+Domain Layer: Berisi aturan bisnis dan entitas domain.
+
+Data Layer: Bertanggung jawab untuk berkomunikasi dengan sumber daya eksternal seperti API atau database.
+
+Presentation Layer: Mengatur tampilan dan menerima input pengguna, bertanggung jawab untuk menghubungkan antara domain dan data.
+
+Clean Architecture membantu memisahkan kode menjadi bagian-bagian yang independen dan dapat diuji, memungkinkan fleksibilitas dan perubahan tanpa mempengaruhi bagian lain dari aplikasi. Dengan menggunakan Dependency Injection, misalnya, kita dapat dengan mudah mengganti implementasi data tanpa mengubah kode di lapisan presentasi atau domain.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
 
 </details>
