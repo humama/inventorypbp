@@ -155,6 +155,7 @@ Stateful widget memiliki dua kelas terpisah: kelas widget itu sendiri (yang bers
 </details>
 <details>
   <summary>Tugas 8</summary>
+
 1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
 
 Navigator.push():
@@ -217,4 +218,292 @@ Clean Architecture membantu memisahkan kode menjadi bagian-bagian yang independe
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
 
+- Buat dua direktori bernama screens dan widgets di dalam direktori lib
+- Buat file baru bernama `left_drawer.dart` dan `inventory_card.dart` di direktori widgets
+- Pindahkan _class_ InventoryItem dan InventoryCard dari `menu.dart` ke `inventory_card.dart` dan _import_ `inventory_card.dart` pada file `menu.dart` 
+- Pindahkan file `menu.dart` ke dalam direktori screens
+- Isi `left_drawer.dart` dengan kode berikut.
+<pre>
+import 'package:flutter/material.dart';
+import 'package:inventorypbp/screens/menu.dart';
+import 'package:inventorypbp/screens/inventorylist_form.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.indigo,
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Inventory PBP',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(10)),
+                Text("Catat seluruh keperluan belanjamu di sini!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Halaman Utama'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Item'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InventoryFormPage(),
+                  ));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+</pre>
+- Isi `inventorylist_form.dart` dengan kode berikut.
+<pre>
+import 'package:flutter/material.dart';
+import 'package:inventorypbp/widgets/left_drawer.dart';
+
+class InventoryFormPage extends StatefulWidget {
+    const InventoryFormPage({super.key});
+
+    @override
+    State<InventoryFormPage> createState() => _InventoryFormPageState();
+}
+
+class _InventoryFormPageState extends State<InventoryFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  String _name = "";
+  int _amount = 0;
+  String _description = "";
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Center(
+              child: Text(
+                'Form Tambah Item',
+              ),
+            ),
+            backgroundColor: Colors.indigo,
+            foregroundColor: Colors.white,
+          ),
+          drawer: const LeftDrawer(),
+          body: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Nama Item",
+                        labelText: "Nama Item",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _name = value!;
+                        });
+                      },
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return "Nama tidak boleh kosong!";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Jumlah",
+                        labelText: "Jumlah",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _amount = int.parse(value!);
+                        });
+                      },
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return "Jumlah tidak boleh kosong!";
+                        }
+                        if (int.tryParse(value) == null) {
+                          return "Jumlah harus berupa angka!";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Deskripsi",
+                        labelText: "Deskripsi",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _description = value!;
+                        });
+                      },
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return "Deskripsi tidak boleh kosong!";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.indigo),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text('Item berhasil tersimpan'),
+                                          content: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Nama: $_name'),
+                                                Text('Jumlah: $_amount'),
+                                                Text('Deskripsi: $_description'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('OK'),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  _formKey.currentState!.reset();
+                                  }
+                                },
+                                child: const Text(
+                                  "Save",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.indigo),
+                                ),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "Back",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              )
+                            )
+                          )
+                        )
+                      ]
+                    )
+                  ),
+                ]
+              )
+            ),
+          ),
+        );
+    }
+}
+</pre>
+- Tambahkan fungsi pada `inventory_card.dart` sehingga ketika penguna menggunakan tombol Tambah Item, pengguna akan dialihkan ke halaman Tambah Item.
+<pre>
+          if (item.name == "Tambah Item") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const InventoryFormPage()
+              ),
+            );
+          }
+</pre>
+- Tambahkan drawer pada file `menu.dart` dan `inventorylist_form.dart` dengan menambahkan line 
+<pre>drawer: const LeftDrawer(),</pre>
+di widget build sebelum body
+
+- Tambahkan juga tombol _Back_ pada file `inventorylist_form.dart` agar pengguna bisa mudah kembali ke halaman utama
 </details>

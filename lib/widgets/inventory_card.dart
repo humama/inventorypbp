@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventorypbp/screens/shoplist_form.dart';
+import 'package:inventorypbp/screens/inventorylist_form.dart';
 
 class InventoryItem {
   final String name;
@@ -32,7 +32,7 @@ class InventoryCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ShopFormPage()
+                builder: (context) => const InventoryFormPage()
               ),
             );
           }
