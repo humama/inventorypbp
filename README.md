@@ -507,3 +507,39 @@ di widget build sebelum body
 
 - Tambahkan juga tombol _Back_ pada file `inventorylist_form.dart` agar pengguna bisa mudah kembali ke halaman utama
 </details>
+<details>
+  <summary>Tugas 9</summary>
+
+1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON? 
+
+Ya, bisa. Dalam beberapa kasus, terutama untuk proyek kecil atau ketika struktur data tidak kompleks, kita dapat menggunakan tipe data dinamis (seperti Map<String, dynamic>) untuk mengambil dan memproses data JSON tanpa membuat model terlebih dahulu. Ini dapat mempermudah implementasi, tetapi memiliki kelemahan karena kehilangan keamanan tipe yang dimiliki model. Penggunaan model membantu memastikan bahwa data yang diambil sesuai dengan ekspektasi aplikasi.
+
+2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+
+CookieRequest pada umumnya tidak merupakan bagian dari Flutter sendiri, namun, mungkin Anda berbicara tentang http.Cookie di Flutter yang digunakan untuk bekerja dengan cookie dalam permintaan HTTP. Jika begitu, instance http.Cookie dibagikan ke semua komponen dalam aplikasi untuk mempertahankan sesi atau status otentikasi antar permintaan HTTP. Ini penting untuk menjaga keadaan otentikasi dan memastikan bahwa permintaan selanjutnya dapat diotentikasi dengan benar.
+
+3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+
+Mekanisme umum melibatkan penggunaan paket HTTP seperti http untuk membuat permintaan ke API atau sumber data JSON. Data JSON kemudian diuraikan ke dalam model Dart menggunakan konversi JSON yang otomatis atau manual. Setelah itu, model dapat digunakan dalam struktur widget untuk membangun antarmuka pengguna.
+
+4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+
+Mekanisme otentikasi umumnya melibatkan pengiriman informasi otentikasi (seperti nama pengguna dan kata sandi) dari Flutter ke backend Django melalui permintaan HTTP. Django akan memverifikasi informasi tersebut, dan jika valid, akan menghasilkan token akses atau memberikan sesi otentikasi. Token atau sesi ini kemudian dapat digunakan dalam permintaan berikutnya untuk mengotentikasi pengguna dan memberikan akses ke sumber daya terproteksi.
+
+5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+
+Container: widget ini menyediakan 'kanvas' untuk programmer membuat sebuah aplikasi Flutter.
+Column: widget ini menampilkan child dalam format vertikal.
+Text: widget ini menampilkan string dalam satu baris.
+AppBar: widget ini sama seperti toolbar pada aplikasi lain yang sering kita gunakan, yang berguna untuk menampilkan judul dan fitur-fitur utama pada aplikasi.
+Scaffold: Digunakan sebagai kerangka dasar untuk sebagian besar aplikasi Flutter.
+Row: widget ini menampilkan child dalam format horizontal.
+Material: Digunakan sebagai container untuk mengimplementasikan desain Material Design dalam aplikasi Flutter.
+ListView: Menampilkan daftar widget dalam format scrollable. Digunakan ketika daftar item mungkin melebihi ruang layar yang tersedia.
+Padding: Menambahkan ruang kosong atau margin di sekitar widget child di dalamnya. Digunakan untuk memberikan ruang antara elemen-elemen dalam tata letak.
+GridView: Menampilkan daftar widget dalam format grid. Berguna ketika item perlu diatur dalam grid dengan beberapa kolom.
+
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+
+
+</details>

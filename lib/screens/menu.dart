@@ -19,7 +19,7 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         elevation: 5,
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.lightGreen,
         shadowColor: Colors.black,
         foregroundColor: Colors.white,
       ),
